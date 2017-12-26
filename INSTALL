@@ -1,0 +1,5 @@
+Build split-gtk.
+==============================
+./configure --prefix=/usr --sysconfdir=/etc --mandir=/usr/share/man
+make
+make install
