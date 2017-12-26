@@ -18,10 +18,30 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/main.cpp:43
+#: ../src/main.cpp:44
 msgid "split-gtk"
-msgstr ""
+msgstr "split-gtk"
 
-#: ../src/main.cpp:79
-msgid "_Split"
-msgstr "分割文件(_S)"
+#: ../src/main.cpp:57
+msgid "Choose file to split:"
+msgstr "选择要分割的文件："
+
+#: ../src/main.cpp:59
+msgid "Select a file"
+msgstr "选择一个文件"
+
+#: ../src/main.cpp:84
+msgid "Or custom split size:"
+msgstr "或者自定义文件分割大小："
+
+#: ../src/main.cpp:98
+msgid "Choose file name style:"
+msgstr "选择文件名风格："
+
+#: ../src/main.cpp:111
+msgid "Begin _Split"
+msgstr "开始分割文件(_S)"
+
+#: ../src/main.cpp:126
+msgid "Error: \"split\" command not found!"
+msgstr ""

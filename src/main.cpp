@@ -42,7 +42,7 @@ static void create_window()
 	main_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
 	gtk_window_set_title(GTK_WINDOW (main_window), _("split-gtk"));
-	gtk_window_set_default_size(GTK_WINDOW (main_window), 410, 470);
+	gtk_window_set_default_size(GTK_WINDOW (main_window), 408, 470);
 	gtk_container_set_border_width (GTK_CONTAINER (main_window), 5);
 	g_signal_connect (G_OBJECT (main_window), "delete_event", G_CALLBACK (on_delete_event), NULL);
 
@@ -55,14 +55,18 @@ static void create_window()
 	gtk_box_pack_start (GTK_BOX (main_vbox), vbox1, TRUE, TRUE, 2);
 	GtkWidget *label;
 	label = gtk_label_new(_("Choose file to split:"));
-	gtk_box_pack_start (GTK_BOX (vbox1), label, TRUE, TRUE, 2);
+	gtk_box_pack_start (GTK_BOX (vbox1), label, FALSE, FALSE, 2);
 	GtkWidget *file_chooser_button = gtk_file_chooser_button_new (_("Select a file"), GTK_FILE_CHOOSER_ACTION_OPEN);
 	gtk_box_pack_start (GTK_BOX (vbox1), file_chooser_button, TRUE, TRUE, 2);
+
+	GtkWidget *vbox_tmp;
+	vbox_tmp = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+	gtk_box_pack_start (GTK_BOX (main_vbox), vbox_tmp, TRUE, TRUE, 2);
 
 
 	GtkWidget *vbox2;
 	vbox2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
-	gtk_box_pack_start (GTK_BOX (main_vbox), vbox2, TRUE, TRUE, 2);
+	gtk_box_pack_start (GTK_BOX (main_vbox), vbox2, FALSE, FALSE, 2);
 
 
 	GtkWidget *hbox1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
@@ -83,6 +87,9 @@ static void create_window()
 	GtkWidget *entry = gtk_entry_new();
 	gtk_box_pack_start (GTK_BOX (vbox2), entry, FALSE, FALSE, 2);
 
+	GtkWidget *vbox_tmp2;
+	vbox_tmp2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+	gtk_box_pack_start (GTK_BOX (main_vbox), vbox_tmp2, TRUE, TRUE, 2);
 
 	GtkWidget *vbox3;
 	vbox3 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
@@ -101,7 +108,7 @@ static void create_window()
 	gtk_box_pack_start (GTK_BOX (hbox2), radio_a2, TRUE, TRUE, 2);
 
 
-	GtkWidget *button1 = gtk_button_new_with_mnemonic(_("Begain _Split"));
+	GtkWidget *button1 = gtk_button_new_with_mnemonic(_("Begin _Split"));
 	gtk_box_pack_start (GTK_BOX (main_vbox), button1, TRUE, TRUE, 2);
 
 
@@ -109,8 +116,7 @@ static void create_window()
 
 
 // "split" command should exists in most case!
-#if 0
-	int result;
+/*	int result;
         result = system("which split");
 	if (result != 0) {
 		GtkWidget *dialog = gtk_message_dialog_new (GTK_WINDOW(main_window),
@@ -120,12 +126,16 @@ static void create_window()
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 	}
-#endif
+*/
 
 }
 
 int main(int argc,char **argv)
 {
+	bindtextdomain (GETTEXT_PACKAGE, SPLIT_GTK_LOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
+
 	gtk_init(&argc, &argv);
 	create_window();
 	gtk_main();
