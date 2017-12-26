@@ -20,6 +20,7 @@
 #endif
 
 
+#include <stdlib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
@@ -49,38 +50,78 @@ static void create_window()
 	main_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 8);
 	gtk_container_add(GTK_CONTAINER(main_window), main_vbox);
 
+	GtkWidget *vbox1;
+	vbox1 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+	gtk_box_pack_start (GTK_BOX (main_vbox), vbox1, TRUE, TRUE, 2);
+	GtkWidget *label;
+	label = gtk_label_new(_("Choose file to split:"));
+	gtk_box_pack_start (GTK_BOX (vbox1), label, TRUE, TRUE, 2);
+	GtkWidget *file_chooser_button = gtk_file_chooser_button_new (_("Select a file"), GTK_FILE_CHOOSER_ACTION_OPEN);
+	gtk_box_pack_start (GTK_BOX (vbox1), file_chooser_button, TRUE, TRUE, 2);
+
+
+	GtkWidget *vbox2;
+	vbox2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+	gtk_box_pack_start (GTK_BOX (main_vbox), vbox2, TRUE, TRUE, 2);
+
+
 	GtkWidget *hbox1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
-	gtk_box_pack_start (GTK_BOX (main_vbox), hbox1, TRUE, TRUE, 2);
+	gtk_box_pack_start (GTK_BOX (vbox2), hbox1, FALSE, FALSE, 2);
 
-	GtkWidget *radio1 = gtk_radio_button_new (NULL);
+	GtkWidget *radio1 = gtk_radio_button_new_with_label (NULL, "800M");
 	gtk_box_pack_start (GTK_BOX (hbox1), radio1, TRUE, TRUE, 2);
-	GtkWidget *entry = gtk_entry_new();
-	gtk_container_add (GTK_CONTAINER (radio1), entry);
-
-	GtkWidget *radio2 = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio1), "800M");
+	GtkWidget *radio2 = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio1), "1G");
 	gtk_box_pack_start (GTK_BOX (hbox1), radio2, TRUE, TRUE, 2);
-	GtkWidget *radio3 = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio1), "1G");
+	GtkWidget *radio3 = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio1), "2G");
 	gtk_box_pack_start (GTK_BOX (hbox1), radio3, TRUE, TRUE, 2);
-	GtkWidget *radio4 = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio1), "2G");
+	GtkWidget *radio4 = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio1), "4G");
 	gtk_box_pack_start (GTK_BOX (hbox1), radio4, TRUE, TRUE, 2);
-	GtkWidget *radio5 = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio1), "4G");
-	gtk_box_pack_start (GTK_BOX (hbox1), radio5, TRUE, TRUE, 2);
 
+	label = gtk_label_new(_("Or custom split size:"));
+	gtk_label_set_xalign(GTK_LABEL(label), 0);
+	gtk_box_pack_start (GTK_BOX (vbox2), label, FALSE, FALSE, 2);
+	GtkWidget *entry = gtk_entry_new();
+	gtk_box_pack_start (GTK_BOX (vbox2), entry, FALSE, FALSE, 2);
+
+
+	GtkWidget *vbox3;
+	vbox3 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+	gtk_box_pack_start (GTK_BOX (main_vbox), vbox3, FALSE, FALSE, 2);
+
+	label = gtk_label_new(_("Choose file name style:"));
+	gtk_label_set_xalign(GTK_LABEL(label), 0);
+	gtk_box_pack_start (GTK_BOX (vbox3), label, FALSE, FALSE, 2);
 
 	GtkWidget *hbox2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
-	gtk_box_pack_start (GTK_BOX (main_vbox), hbox2, TRUE, TRUE, 2);
+	gtk_box_pack_start (GTK_BOX (vbox3), hbox2, FALSE, FALSE, 2);
 
 	GtkWidget *radio_a1 = gtk_radio_button_new_with_label(NULL, "file.1 file.2 file.3 file.4 ....");
 	gtk_box_pack_start (GTK_BOX (hbox2), radio_a1, TRUE, TRUE, 2);
-
 	GtkWidget *radio_a2 = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio_a1), "xaa xab xac xad xae xaf ....");
 	gtk_box_pack_start (GTK_BOX (hbox2), radio_a2, TRUE, TRUE, 2);
 
-	GtkWidget *button1 = gtk_button_new_with_mnemonic(_("_Split"));
+
+	GtkWidget *button1 = gtk_button_new_with_mnemonic(_("Begain _Split"));
 	gtk_box_pack_start (GTK_BOX (main_vbox), button1, TRUE, TRUE, 2);
 
 
 	gtk_widget_show_all(main_window);
+
+
+// "split" command should exists in most case!
+#if 0
+	int result;
+        result = system("which split");
+	if (result != 0) {
+		GtkWidget *dialog = gtk_message_dialog_new (GTK_WINDOW(main_window),
+                                  GTK_DIALOG_DESTROY_WITH_PARENT,
+                                  GTK_MESSAGE_ERROR,
+                                  GTK_BUTTONS_CLOSE, "%s", _("Error: \"split\" command not found!"));
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+	}
+#endif
+
 }
 
 int main(int argc,char **argv)
