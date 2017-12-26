@@ -20,7 +20,10 @@
 #endif
 
 
-static GtkWidget *main_window;
+#include <gtk/gtk.h>
+
+
+
 
 
 
@@ -33,6 +36,7 @@ static gboolean on_delete_event(GtkWidget * window, GdkEvent *event , gpointer d
 
 static void create_window()
 {
+	GtkWidget *main_window;
 	main_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
 	gtk_window_set_title(GTK_WINDOW (main_window), "split-gtk");
@@ -40,7 +44,12 @@ static void create_window()
 	gtk_container_set_border_width (GTK_CONTAINER (main_window), 5);
 	g_signal_connect (G_OBJECT (main_window), "delete_event", G_CALLBACK (on_delete_event), NULL);
 
-	gtk_container_add(GTK_CONTAINER(main_window), notebook);
+	GtkWidget *main_vbox;
+	main_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 8);
+	gtk_container_add(GTK_CONTAINER(main_window), main_vbox);
+
+	//GtkWidget *hbox1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+	//GtkWidget *radio_button
 
 	gtk_widget_show_all(main_window);
 }
