@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: split-gtk-1.0.0\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=glib&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-12-26 13:28+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-10 16:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Hu Zheng <huzheng_001@hotmail.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -40,5 +39,3 @@ msgstr "选择文件名风格："
 #: ../src/main.cpp:111
 msgid "Begin _Split"
 msgstr "开始分割文件(_S)"
-
-
